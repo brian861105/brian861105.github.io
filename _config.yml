@@ -11,6 +11,10 @@ author: YouChen Huang
 language: zh-TW
 timezone: 'Asia/Taipei'
 
+# Sidebar settings
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "我要成为魔法师!"
+
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: "https://brian861105.github.io"
