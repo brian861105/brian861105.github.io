@@ -13,11 +13,11 @@
 
     <title>
         
-          Hello World - undefined
+          Longest Common Subsequence - undefined
         
     </title>
 
-    <link rel="canonical" href="https://brian861105.github.io/2024/10/02/hello-world/">
+    <link rel="canonical" href="https://brian861105.github.io/2024/10/05/Longest-Common-Subsequence/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -147,12 +147,16 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                          <a class="tag" href="/tags/#leetcode" title="leetcode">leetcode</a>
+                        
+                          <a class="tag" href="/tags/#dynamic programming" title="dynamic programming">dynamic programming</a>
+                        
                     </div>
-                    <h1>Hello World</h1>
+                    <h1>Longest Common Subsequence</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by YouChen Huang on
-                        2024-10-02
+                        2024-10-05
                     </span>
                 </div>
             </div>
@@ -171,20 +175,24 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+                <h1 id="Longest-Common-Subsequence"><a href="#Longest-Common-Subsequence" class="headerlink" title="Longest Common Subsequence"></a>Longest Common Subsequence</h1><h2 id="題目敘述"><a href="#題目敘述" class="headerlink" title="題目敘述"></a>題目敘述</h2><p>Given two strings <code>text1</code> and <code>text2</code>, return the length of their longest common subsequence. If there is no common subsequence, return 0.</p>
+<h3 id="Definitions"><a href="#Definitions" class="headerlink" title="Definitions"></a>Definitions</h3><h4 id="Subsequence"><a href="#Subsequence" class="headerlink" title="Subsequence"></a>Subsequence</h4><p>A <strong>subsequence</strong> of a string is a new string generated from the original string with some characters (can be none) deleted without changing the relative order of the remaining characters.</p>
+<ul>
+<li>For example, “ace” is a subsequence of “abcde”.</li>
+</ul>
+<h4 id="Common-Subsequence"><a href="#Common-Subsequence" class="headerlink" title="Common Subsequence"></a>Common Subsequence</h4><p>A <strong>common subsequence</strong> of two strings is a subsequence that is common to both strings.</p>
+<h3 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h3><p>Implement a function that finds the length of the longest common subsequence between two given strings.</p>
+<h3 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h3><p><strong>Input</strong>: text1 &#x3D; “abcde”, text2 &#x3D; “ace”<br><strong>Output</strong>: 3<br><strong>Explanation</strong>: The longest common subsequence is “ace” and its length is 3.</p>
+<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2:"></a>Example 2:</h3><p><strong>Input</strong>: text1 &#x3D; “abc”, text2 &#x3D; “abc”<br><strong>Output</strong>: 3<br><strong>Explanation</strong>: The longest common subsequence is “abc” and its length is 3.</p>
+<h3 id="Example-3"><a href="#Example-3" class="headerlink" title="Example 3:"></a>Example 3:</h3><p><strong>Input</strong>: text1 &#x3D; “abc”, text2 &#x3D; “def”<br><strong>Output</strong>: 0<br><strong>Explanation</strong>: There is no such common subsequence, so the result is 0.</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>Dynamic Program</p>
+<p>因為此題不需要連續的字母，因此我們可以使用dynamic program</p>
+<p>let dp 為 (text1.size + 1) * (text2.size + 1) 大小的 矩陣</p>
+<p>當 text1 第 n 個字母 以及 text2 第 m 個字母的時候，我們需要比較兩者是否相同，反之則取 第 n - 1 個字母對第 m 個字母 和 第 n 個字母對第 m - 1 個字母 所得到的最大 Common Subsequence 的長度</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if text1[n - 1] == text2[m - 1]</span><br><span class="line"></span><br><span class="line">dp[n][m] = dp[n - 1][m - 1] + 1</span><br><span class="line"></span><br><span class="line">else</span><br><span class="line"></span><br><span class="line">dp[n][m] = max(dp[n-1][m], dp[n][m-1])</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+<p>在C++ 我們可以這樣寫</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">int longestCommonSubsequence(string text1, string text2) &#123;</span><br><span class="line">    int text1Length = text1.size();</span><br><span class="line">    int text2Length = text2.size();</span><br><span class="line"></span><br><span class="line">    int dp[text1Length + 1][text2Length + 1];</span><br><span class="line"></span><br><span class="line">    memset(dp, 0, sizeof(dp));</span><br><span class="line"></span><br><span class="line">    for(int i = 1; i &lt;= text1Length; i++)&#123;</span><br><span class="line">        for(int j = 1; j &lt;= text2Length; j++)&#123;</span><br><span class="line">            if(text1[i - 1] == text2[j - 1])&#123;</span><br><span class="line">            dp[i][j] = dp[i - 1][j - 1] + 1;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                dp[i][j] = max(dp[i - 1][j], dp[i][j-1]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[text1Length][text2Length];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
                 <hr>
 
@@ -192,10 +200,10 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2024/10/05/Longest-Common-Subsequence/" data-toggle="tooltip" data-placement="top" title="Longest Common Subsequence">&larr; Previous Post</a>
-                        </li>
                     
+                        <li class="next">
+                            <a href="/2024/10/02/hello-world/" data-toggle="tooltip" data-placement="top" title="Hello World">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 
