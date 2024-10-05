@@ -13,11 +13,11 @@
 
     <title>
         
-          Hello World - undefined
+          Combination Sum IV - undefined
         
     </title>
 
-    <link rel="canonical" href="https://brian861105.github.io/2024/10/02/hello-world/">
+    <link rel="canonical" href="https://brian861105.github.io/2024/10/06/Combination-Sum-IV/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -148,11 +148,11 @@
                     <div class="tags">
                         
                     </div>
-                    <h1>Hello World</h1>
+                    <h1>Combination Sum IV</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by YouChen Huang on
-                        2024-10-02
+                        2024-10-06
                     </span>
                 </div>
             </div>
@@ -171,19 +171,13 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <h1 id="377-Combination-Sum-IV"><a href="#377-Combination-Sum-IV" class="headerlink" title="377. Combination Sum IV"></a>377. Combination Sum IV</h1><h2 id="題目敘述"><a href="#題目敘述" class="headerlink" title="題目敘述"></a>題目敘述</h2><p>Given an array of <strong>distinct</strong> integers <code>nums</code> and a <code>target</code> integer target, return the number of possible combinations that add up to <code>target</code>.</p>
+<p>The test cases are generated so that the answer can fit in a <strong>32-bit</strong> integer.</p>
+<h3 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1:"></a>Example 1:</h3><p><strong>Input</strong>: nums &#x3D; [1,2,3], target &#x3D; 4 <br><strong>Output</strong>: 7 <br><strong>Explanation</strong>: <br>The possible combination ways are:<br>(1, 1, 1, 1)<br>(1, 1, 2)<br>(1, 2, 1)<br>(1, 3)<br>(2, 1, 1)<br>(2, 2)<br>(3, 1)<br>Note that different sequences are counted as different combinations.</p>
+<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2:"></a>Example 2:</h3><p><strong>Input</strong>: nums &#x3D; [9], target &#x3D; 3 <br><strong>Output</strong>: 0</p>
+<h3 id="Constraints"><a href="#Constraints" class="headerlink" title="Constraints:"></a>Constraints:</h3><p>1 &lt;&#x3D; nums.length &lt;&#x3D; 200<br>1 &lt;&#x3D; nums[i] &lt;&#x3D; 1000<br>All the elements of nums are unique.<br>1 &lt;&#x3D; target &lt;&#x3D; 1000</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p> 每個數字都由 nums 來組合而成，而且 num 本身可以重複，因此我們可以把 n 視作 n - num 可以由 nums 組合而成的數量總成</p>
+<p> 首先我們需要設定 dp<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;unsigned&gt; dp(target + 1, 0); // 由於 int 會有越位的狀況，因此我們使用 unsigned int</span><br><span class="line">dp[0] = 1;</span><br><span class="line"></span><br><span class="line">for(int i = 1; i &lt;= target; i++)&#123; //我們從 1 開始去算各個整數的組合</span><br><span class="line">    for(auto num : nums)&#123;</span><br><span class="line">        if(i &gt;= num) // i 必須要大於 num 才會有機會有組合</span><br><span class="line">        &#123;</span><br><span class="line">            dp[i] += dp[i - num];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">return dp[target];</span><br></pre></td></tr></table></figure></p>
 
 
                 <hr>
@@ -192,10 +186,10 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2024/10/05/Longest-Common-Subsequence/" data-toggle="tooltip" data-placement="top" title="Longest Common Subsequence">&larr; Previous Post</a>
-                        </li>
                     
+                        <li class="next">
+                            <a href="/2024/10/05/Word-Break/" data-toggle="tooltip" data-placement="top" title="Word Break">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 

@@ -13,11 +13,11 @@
 
     <title>
         
-          
+          Word Break - undefined
         
     </title>
 
-    <link rel="canonical" href="https://brian861105.github.io/">
+    <link rel="canonical" href="https://brian861105.github.io/2024/10/05/Word-Break/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -129,168 +129,114 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://brian861105.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/undefined')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>YouChen&#39;s Blog</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading"></span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#leetcode" title="leetcode">leetcode</a>
+                        
+                          <a class="tag" href="/tags/#dynamic programming" title="dynamic programming">dynamic programming</a>
+                        
+                    </div>
+                    <h1>Word Break</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by YouChen Huang on
+                        2024-10-05
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <!-- Main Content -->
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="139-Word-Break"><a href="#139-Word-Break" class="headerlink" title="139 Word Break"></a>139 Word Break</h1><h2 id="題目敘述"><a href="#題目敘述" class="headerlink" title="題目敘述"></a>題目敘述</h2><p>Given a string <code>s</code> and <code>a</code> dictionary of strings <code>wordDict</code>, return true if <code>s</code> can be segmented into a space-separated sequence of one or more dictionary words.</p>
+<p><strong>Note</strong> that the same word in the dictionary may be reused multiple times in the segmentation.</p>
+<h3 id="Example1"><a href="#Example1" class="headerlink" title="Example1"></a>Example1</h3><p><strong>Input</strong>: s &#x3D; “leetcode”, wordDict &#x3D; [“leet”,”code”]<br><strong>Output</strong>: true<br><strong>Explanation</strong>: Return true because “leetcode” can be segmented as “leet code”.</p>
+<h3 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2:"></a>Example 2:</h3><p><strong>Input</strong>: s &#x3D; “applepenapple”, wordDict &#x3D; [“apple”,”pen”]<br><strong>Output</strong>: true<br><strong>Explanation</strong>: Return true because “applepenapple” can be segmented as “apple pen apple”.<br>Note that you are allowed to reuse a dictionary word.</p>
+<h3 id="Example-3"><a href="#Example-3" class="headerlink" title="Example 3:"></a>Example 3:</h3><p><strong>Input</strong>: s &#x3D; “catsandog”, wordDict &#x3D; [“cats”,”dog”,”sand”,”and”,”cat”]<br><strong>Output</strong>: false</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>每個單字可以重複，因此我們需要紀錄的是在第 n 個的字母時，是否為合法，如果為合法我們就可以從 wordDict 中找到最適合他的</p>
+<p>首先我們先將 wordDict 中的每個單字，根據字首分門別類</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">unordered_map&lt;char, vector&lt;string&gt;&gt; map;</span><br><span class="line"></span><br><span class="line">for(auto word:wordDict)&#123;</span><br><span class="line">    map[word[0]].push_back(word);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我們接著將 string 利用 dp 來說明第 n 個字母是否合法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;bool&gt; dp(s.size() + 1, false);</span><br><span class="line"></span><br><span class="line">dp[0] = true;</span><br><span class="line"></span><br><span class="line">for(int i = 0; i &lt; s.size(); i++)&#123;</span><br><span class="line">    if(dp[i])&#123; // 如果第 i 個字母為合法，則我們從 wordDict 中挑選一個合法的</span><br><span class="line">        for(auto word:map[s[i]])&#123;</span><br><span class="line">            if(word == s.substr(i, word.size()))&#123;</span><br><span class="line">                dp[i + word.size()] = true;</span><br><span class="line">            &#125;           </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">return dp[s.size()]; // 最後將最後一個字母結果回傳</span><br></pre></td></tr></table></figure>
 
 
-<div class="post-preview">
+                <hr>
 
-    <a href="/2024/10/06/Combination-Sum-IV/">
-        <h2 class="post-title">
-            Combination Sum IV
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            377. Combination Sum IV題目敘述Given an array of distinct integers nums and a target integer target, return the number of possible combinations that add up to target.
-The test cases are generated so th......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by YouChen Huang on
-        2024-10-06
-    </p>
+                
 
-</div>
-<hr>
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2024/10/06/Combination-Sum-IV/" data-toggle="tooltip" data-placement="top" title="Combination Sum IV">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2024/10/05/Longest-Common-Subsequence/" data-toggle="tooltip" data-placement="top" title="Longest Common Subsequence">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
 
-<div class="post-preview">
+                
 
-    <a href="/2024/10/05/Word-Break/">
-        <h2 class="post-title">
-            Word Break
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            139 Word Break題目敘述Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.
-Note that the same word i......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by YouChen Huang on
-        2024-10-05
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2024/10/05/Longest-Common-Subsequence/">
-        <h2 class="post-title">
-            Longest Common Subsequence
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            1143 Longest Common Subsequence題目敘述Given two strings text1 and text2, return the length of their longest common subsequence. If there is no common subsequence, return 0.
-DefinitionsSubsequenceA sub......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by YouChen Huang on
-        2024-10-05
-    </p>
-
-</div>
-<hr>
-
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-    
-</ul>
-
-
-
-                <!-- 如果开启评论功能 -->
                 
 
             </div>
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
+
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-
-                        
-
-                        
-                            <p>我要成为魔法师!</p>
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                            
-
-                            
-
-                            
-
-                            
-                            
-                            
-                            
-                        </ul>
-                    </div>
-                </section>
-                
                 <!-- Friends Blog -->
                 
             </div>
-        
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+
+
+
 
 
     <!-- Footer -->
