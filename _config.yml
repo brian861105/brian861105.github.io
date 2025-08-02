@@ -106,10 +106,4 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: butterfly
-
-# Deployment
-## Docs: https://hexo.io/docs/one-command-deployment
-deploy:
-  type: git
-  repo: git@github.com:brian861105/brian861105.github.io.git
-  branch: gh-pages
+remote_theme: "username/repository"
