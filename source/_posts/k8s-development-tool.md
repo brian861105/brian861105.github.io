@@ -1,6 +1,6 @@
 ---
-title: Kind Introduction
-date: 2024-10-05 01:56:56
+title: k8s_development_tool
+date: 2025-08-03 00:56:01
 tags: 
     - development tool
 categories:
@@ -28,3 +28,4 @@ kind 是 Kubernetes 底下的一個子專案，他的全名是 Kubernetes in Doc
 - 缺點：
     - 由於 Kind 的 Node 是 Docker 容器，它無法完全模擬真實機器或虛擬機環境中的所有功能。這可能導致在測試一些底層的硬體相關功能或需要特定虛擬化驅動的應用程式時，會遇到問題。
     - Kind 的主要設計目的就是測試 Kubernetes 本身和開發環境，而不是作為一個生產級的解決方案。它不具備 Minikube 在 local 開發時所具有的一些便利功能，例如 dashboard。
+---
