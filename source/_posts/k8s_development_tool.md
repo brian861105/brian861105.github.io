@@ -1,3 +1,11 @@
+---
+title: Kind Introduction
+date: 2024-10-05 01:56:56
+tags: 
+    - development tool
+categories:
+    - K8s
+---
 Kubernetes 是現在最常被使用的容器編排平台 (container orchestration platform)，對於想要在 local 環境開發的開發者，選擇一套能夠模擬 Kubernetes 行為的工具，來進行本地的測試開發，變得越來越重要。
 
 像是 Kind 和 Minikube 等工具就提供了方便的解決方式。該篇文章中會提及每一種工具所著重的地方在哪裡，而我們需要根據怎樣的情景選擇對應的工具進行開發。

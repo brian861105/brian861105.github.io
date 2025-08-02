@@ -2,8 +2,9 @@
 title: Word Break
 date: 2024-10-05 11:19:31
 tags:
-  - leetcode
-  - dynamic programming
+    - dynamic programming
+categories:
+    - leetcode
 ---
 # Word Break
 
