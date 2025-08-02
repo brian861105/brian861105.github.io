@@ -5,7 +5,7 @@
 # Site
 title: YouChen's Blog
 subtitle: ''
-description: ''
+description: '不吃早餐會變笨蛋'
 keywords:
 author: YouChen Huang
 language: zh-TW
@@ -13,7 +13,7 @@ timezone: 'Asia/Taipei'
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "我要成为魔法师!"
+sidebar-about-description: "一個嘗試把想法寫成文章的初學者"
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -43,7 +43,7 @@ external_link:
   enable: true # Open external links in new tab
   field: site # Apply to the whole site
   exclude: ''
-filename_case: 0
+filename_case: 1
 render_drafts: false
 post_asset_folder: false
 relative_link: false
@@ -71,8 +71,14 @@ index_generator:
 
 # Category & Tag
 default_category: uncategorized
+
 category_map:
+  NexT: next
+  Hexo: hexo
+  leetcode: leetcode
+
 tag_map:
+  JavaScript: javascript
 
 # Metadata elements
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
@@ -94,14 +100,12 @@ pagination_dir: page
 
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
-include:
-exclude:
 ignore:
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: huxblog
+theme: butterfly
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
