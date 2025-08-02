@@ -17,7 +17,7 @@ sidebar-about-description: "一個嘗試把想法寫成文章的初學者"
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: "https://brian861105.github.io"
+url: "https://brian861105.github.io/blog"
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -106,4 +106,3 @@ ignore:
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: butterfly
-remote_theme: "username/repository"
