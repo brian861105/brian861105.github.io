@@ -2,8 +2,9 @@
 title: Longest Common Subsequence
 date: 2024-10-05 01:56:56
 tags: 
-  - leetcode
-  - dynamic programming
+    - dynamic programming
+categories:
+    - leetcode
 ---
 # Longest Common Subsequence
 
