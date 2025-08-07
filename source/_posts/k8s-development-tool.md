@@ -1,8 +1,9 @@
 ---
-title: k8s_development_tool
+title: K8s Development Tool
 date: 2025-08-03 00:56:01
 tags: 
     - development tool
+    - K8s
 categories:
     - K8s
 ---
@@ -20,14 +21,30 @@ kind 是 Kubernetes 底下的一個子專案，他的全名是 Kubernetes in Doc
 因為 kind 具備了有 Docker 就可以執行的設計，也成為了本地端開發的一個選項。開發者不需要額外的 VM，或者安裝其他的 K8s 在自己的開發環境中。正因為它只需要 Docker 環境就能運作，因此能夠與 GitHub Actions、GitLab CI 等 CI 工具和 Docker Runner 來搭建 Kubernetes 的測試環境。
 
 ### 特色與優勢
+- 部署方式：使用 Docker 即可在本機或 CI 環境中快速建立 Kubernetes 集群
+- 系統資源使用：在使用 kind 中，每個 Kubernetes Node 視為一個 Docker 容器。一個容器比一個完整的虛擬機輕巧得多
+- 支援多 Node 叢集：可以輕易的創建一個多 node 的叢集，在測試功能以及需要多 node 的應用程式上有著一定的優勢，雖然 minikube 也有提供類似的功能，但是需要額外的驅動程式（如 VirtualBox、Hyper-V），相較之下，kind 提供的方法更簡潔有效。kind 則因為所有 node 都是 Docker 容器，多 Node 的配置完全基於 Docker 的 network，設定檔簡單明瞭，這正是它在多 node 測試上更具優勢的原因
+- 快速啟動：基於 Docker 容器的特性，啟動速度極快
+- CI/CD 友善：與 GitHub Actions、GitLab CI 等工具完美整合
 
-- 部署方式：使用 Docker 即可在本機或 CI 環境中快速建立 Kubernetes 集群。
-- 系統資源使用：在使用 kind 中，每個 Kubernetes Node 視為一個 Docker 容器。一個容器比一個完整的虛擬機輕巧得多。
-- 支援多 Node 叢集：可以輕易的創建一個多 node 的叢集，在測試功能以及需要多 node 的應用程式上有著一定的優勢，雖然 minikube 也有提供類似的功能，但是需要額外的的驅動程式（如 VirtualBox、Hyper-V ），相較之下， kind 提供的方法更簡潔有效。kind 則因為所有node 都是 Docker 容器，多 Node 的配置完全基於 Docker 的 network，設定檔簡單明瞭，這正是它在多 node 測試上更具優勢的原因。
-- 適用情景：非常適合CI/CD 環境以及本機做測試，因為它可以輕鬆地在任何有 Docker 的機器上運行，包括 GitHub Actions 和 GitLab CI。
-- 缺點：
-    - 由於 Kind 的 Node 是 Docker 容器，它無法完全模擬真實機器或虛擬機環境中的所有功能。這可能導致在測試一些底層的硬體相關功能或需要特定虛擬化驅動的應用程式時，會遇到問題。
-    - Kind 的主要設計目的就是測試 Kubernetes 本身和開發環境，而不是作為一個生產級的解決方案。它不具備 Minikube 在 local 開發時所具有的一些便利功能，例如 dashboard。
+### 適用情景
+- CI/CD 環境中的自動化測試
+- 本機快速測試和開發
+- 多節點 Kubernetes 功能測試
+- Kubernetes 本身的開發和測試
+- 需要快速啟動和銷毀叢集的場景
+
+### 優點
+- 資源使用量低，基於 Docker 容器
+- 啟動和銷毀速度極快
+- 多節點配置簡單，基於 Docker 網路
+- 無需額外的虛擬化驅動程式
+- 與 CI/CD 工具整合度高
+
+### 缺點
+- 由於 Kind 的 Node 是 Docker 容器，它無法完全模擬真實機器或虛擬機環境中的所有功能。這可能導致在測試一些底層的硬體相關功能或需要特定虛擬化驅動的應用程式時，會遇到問題
+- Kind 的主要設計目的就是測試 Kubernetes 本身和開發環境，而不是作為一個生產級的解決方案。它不具備 Minikube 在 local 開發時所具有的一些便利功能，例如 dashboard
+- 功能相對簡單，缺少一些開發便利功能
 
 ## Minikube 介紹
 > minikube is local Kubernetes, focusing on making it easy to learn and develop for Kubernetes.
@@ -35,22 +52,34 @@ kind 是 Kubernetes 底下的一個子專案，他的全名是 Kubernetes in Doc
 minikube 是一個功能豐富的本地 Kubernetes 工具，它的設計目標是讓開發者能夠容易地學習和開發。
 
 ### 特色與優勢
-- 支援最新版本的 K8s，且還能支援」還能支援最多達 6 個之前的次要版本，確保開發者可以測試不同版本的環境。
+- 支援最新版本的 K8s，且還能支援最多達 6 個之前的次要版本，確保開發者可以測試不同版本的環境
 - 跨平台支援，他能在 Linux、macOS 和 Windows 等作業系統上運行
 - 可以在 VM, container 或者是 bare-metal（裸機）上部署
 - 提供多種不同 runtime，例如 CRI-O、containerd 和 docker
-- 提供了一個直接的 API endpoint，可以快速載入 (image load) 和建置 (image build) image。
+- 提供了一個直接的 API endpoint，可以快速載入 (image load) 和建置 (image build) image
 - 內建多種進階功能，如 LoadBalancer, filesystem, FeatureGates, 以及 network policy
 - Addons 用於輕鬆安裝 Kubernetes 應用程式的附加元件
 - 支援常見的 CI 環境
-- 優點
-    - 豐富的 applicaiton 可以進行使用
-    - kubernetes 功能更加齊全
-    - 環境更接近真實的 K8s 環境
-- 缺點
-    - 資源消耗高：虛擬機，記憶體和 CPU 使用較多
-    - 啟動較慢：VM 啟動速度較長
-    - 複雜度高：配置選項多
+
+### 適用情景
+- 本地 Kubernetes 開發和學習
+- 需要豐富功能和插件的開發環境
+- 測試不同版本的 Kubernetes
+- 需要真實 VM 環境的應用測試
+- 使用 Kubernetes Dashboard 進行圖形化管理
+
+### 優點
+- 豐富的 application 可以進行使用
+- Kubernetes 功能更加齊全
+- 環境更接近真實的 K8s 環境
+- 提供豐富的插件生態系統
+- 支援多種虛擬化驅動程式
+
+### 缺點
+- 資源消耗高：虛擬機，記憶體和 CPU 使用較多
+- 啟動較慢：VM 啟動速度較長
+- 複雜度高：配置選項多
+- 對於 CI/CD 環境可能過於重量級
 
 ## k3s 介紹
 > Lightweight Kubernetes. Easy to install, half the memory, all in a binary less than 100 MB.
