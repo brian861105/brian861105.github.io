@@ -15,7 +15,7 @@ comments: false
 
 ## About Me
 
-I possess clear logical thinking, enabling me to effectively trace problems to their root causes. My strong communication and collaboration skills help simplify complex processes. With an optimistic personality, I bring positive energy to the team, fostering an engaging and dynamic work environment. I quickly adapt to new environments and rapidly learn new concepts. I am dedicated to thoroughly solving problems and ensuring effective solutions while maintaining a constructive and enthusiastic approach to challenges.
+I am a backend software engineer with experience in C#, Golang, and Python. I possess strong logical thinking skills that enable me to effectively trace problems to their root causes and deliver robust solutions. My excellent communication and collaboration abilities help bridge technical complexity with team understanding. I build efficient, scalable backend systems that deliver optimal performance and meet critical business objectives.
 
 ---
 
