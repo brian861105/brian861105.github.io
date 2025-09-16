@@ -6,7 +6,7 @@ categories:
 ---
 
 
-# Word Break
+# Number of Visible People in a Queue
 
 ## 題目敘述
 
