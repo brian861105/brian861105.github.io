@@ -29,7 +29,7 @@ Return an array `answer` of length `n` where `answer[i]` is the *number of peopl
 `stack<int> st`
 
 
-```
+```Cpp
 // 接著我們從最右邊開始往回到最左邊來去計算，每個人可以看到多少人
 for(int i = len - 1; i >= 0; i--){
     int count = 0;
