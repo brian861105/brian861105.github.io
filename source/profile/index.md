@@ -23,18 +23,16 @@ I possess clear logical thinking, enabling me to effectively trace problems to t
 ### Backend Engineer | Rayark Inc.
 **March 2025 - August 2025** | Taipei, Taiwan
 
-- Collaborated with frontend developers to design a user-centric global mail delivery interface, conducting iterative UX discussions and translating insights into comprehensive API specifications, significantly improving ease of use for customer
-- Improved equipment system by refactoring and decoupling core equipment algorithms covering upgrade and equipping mechanics to support configuration-driven parameters, enabling game designers to dynamically adjust upgrade rules
-- Assessed QA team requirements through direct collaboration and discussions, evaluated the gap between proposed and actual needs, and selected the optimal approach to implement resource retrieval functionality
-- Monitored GCP logging systems to identify and diagnose bug root causes, then evaluated and prioritized bug fixes based on impact assessment and severity analysis
+- Designed global mail delivery API with frontend team, enhancing customer usability
+- Refactored equipment system, enabling dynamic upgrade and equip rules
+- Implemented resource retrieval, streamlining QA processes
+- Diagnosed and prioritized bugs, improving product stability
 
 ### Software Engineer | BANK SINOPAC Co., Ltd.
 **Feb 2024 - March 2025** | Taipei, Taiwan
 
-- Enhanced system architecture by implementing proper dependency injection design patterns and containerizing applications using Docker, improving code maintainability and testability
-- Orchestrated microservices deployment on Kubernetes, managing pod lifecycle and implementing rolling updates with liveness/readiness probes and pod auto-healing mechanisms to ensure high availability and zero-downtime deployments
-- Contributed to Open Banking API development, leveraging container orchestration for scalable microservices architecture and improving cross-system efficiency
-- Demonstrated independent development capabilities through Holding Share API implementation, handling complex business logic
+- Refactored system with dependency injection and Docker containerization, enhancing maintainability and testability
+- Refactored database and backend code to handle high-load scenarios
 - Proactively identified and resolved code vulnerabilities while optimizing system quality and stability
 
 ### AI Engineer (Part Time) | iiNumbers, Inc.
@@ -66,8 +64,9 @@ I possess clear logical thinking, enabling me to effectively trace problems to t
 ### Programming Languages & Frameworks
 
 **C#**
-- Implemented design patterns for maintainable and scalable code
-- Designed and maintained architecture following SOLID principles
+- Developed web applications using ASP.NET framework
+- Implemented data access layer with Entity Framework
+- Built microservices architecture with gRPC
 
 **Golang**
 - Developed RESTful web APIs using Gin framework
@@ -75,10 +74,7 @@ I possess clear logical thinking, enabling me to effectively trace problems to t
 
 **Python**
 - Implemented deep learning models using PyTorch and TensorFlow for computer vision tasks
-- Developed data processing pipelines for machine learning applications
 - Created automated scripts for data analysis and visualization
-- Built and optimized neural networks with TensorFlow/Keras for various ML tasks
-
 
 ### Database & Data Management
 
@@ -90,14 +86,17 @@ I possess clear logical thinking, enabling me to effectively trace problems to t
 - Analyzed application scenarios and selected appropriate MongoDB Schema design pattern
 - Experienced in applying Embedded Documents, References, Bucket Pattern, and other design pattern implementations
 
+**Redis**
+- Implemented caching solutions to improve application performance
+
 ### DevOps & Cloud Technologies
 
 **CI/CD**
-- Configured and maintained CI/CD pipelines using GitHub Actions and Azure DevOps
+- Configured CI/CD pipelines using GitHub Actions, GitLab CI and Azure DevOps
 - Automated testing and deployment processes
 
 **Container Technologies**
-- Containerized applications using Docker for consistent deployment
+- Containerized applications using Docker
 - Managed Kubernetes clusters for container orchestration
 
 ### Data Science & AI
@@ -117,7 +116,6 @@ I possess clear logical thinking, enabling me to effectively trace problems to t
 - **English**: Professional working proficiency
 
 ---
-
 ## Research Projects
 
 ### Traffic Signs Detection and Few-shot Recognition System
@@ -126,11 +124,3 @@ I possess clear logical thinking, enabling me to effectively trace problems to t
 - Evaluated multiple detection architectures (Scaled YOLOv4, YOLOv7, Soft Teacher) achieving best performance with Scaled YOLOv4 (AP: 38.5%, AP50: 48.9%)
 - Developed improved meta-learning model achieving 95.2% accuracy, outperforming traditional methods (MAML: 79.3%, ProtoNets: 74.6%) by over 17%
 - Integrated detection and few-shot learning components into a unified pipeline for efficient traffic sign recognition
-
----
-
-## Contact
-
-📧 **Email**: brian861105@gmail.com  
-📱 **Phone**: +886 975678882  
-📍 **Location**: Taipei, Taiwan
