@@ -33,7 +33,7 @@ Return an array `answer` of length `n` where `answer[i]` is the *number of peopl
 // 接著我們從最右邊開始往回到最左邊來去計算，每個人可以看到多少人
 for(int i = len - 1; i >= 0; i--){
     int count = 0;
-    // 如果右邊有人，且第 i 個人比阻擋視線中來的高，則更左邊的人只能看到這個阻擋視線的人
+    // 我會把所有比我矮的人都從棧頂彈出來，因為我可以『看穿』他們。每彈出一個人，就代表我能看到一個人，所以 count++。
     while(!st.empty() && (heights[i] > heights[st.top()])){
         st.pop();
         count++;
