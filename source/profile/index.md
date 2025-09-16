@@ -4,8 +4,7 @@ date: 2024-09-14 12:00:00
 type: profile
 comments: false
 ---
-![Profile Photo](/img/profile-photo.png)
-
+<img src="/img/profile-photo.png" alt="Profile Photo" width="280" height="350">
 # You-Chen Huang
 
 **Software Engineer** | Taipei, Taiwan  
