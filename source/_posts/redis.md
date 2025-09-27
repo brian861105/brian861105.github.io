@@ -1,7 +1,8 @@
 ---
 title: redis
 date:2025-09-26 04:52:28
-tags:
+categories:
+    - backend
 ---
 
 ## 什麼是 Redis？
