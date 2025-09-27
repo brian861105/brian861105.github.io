@@ -1,6 +1,6 @@
 ---
 title: redis
-date:2025-09-26 04:52:28
+date: 2025-09-26 04:52:28
 categories:
     - backend
 ---
