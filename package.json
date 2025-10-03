@@ -27,7 +27,7 @@
     "hexo-server": "^3.0.0",
     "hexo-theme-butterfly": "^5.5.1",
     "hexo-theme-landscape": "^1.0.0",
-    "hexo-theme-volantis": "^5.8.0"
+    "hexo-theme-volantis": "^5.8.1"
   },
   "devDependencies": {
     "git-cz": "^4.9.0"
