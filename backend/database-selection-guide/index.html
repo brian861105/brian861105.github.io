@@ -1,0 +1,379 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>RDBMS vs NoSQL:關聯式資料庫選型指南 | YouChen's Blog</title><meta name="author" content="YouChen Huang"><meta name="copyright" content="YouChen Huang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="什麼是關聯式資料庫？關聯式資料庫是一組資訊，以預先定義的關係整理資料，可將資料儲存在一或多個資料表 (或「關係」) 的資料欄或資料列中，以輕鬆查看及瞭解不同的資料結構之間有何關聯。「關係」是不同資料表之間的邏輯連結，根據這些資料表之間的互動來建立。 『關聯』是指不同表格中可以通過共同的欄位（通常是主鍵鍵和外鍵）建立關聯。 為什麼我們使用 RDBMS 而不是 noSQLRDBMS 主要的核心在於提供">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RDBMS vs NoSQL:關聯式資料庫選型指南">
+<meta property="og:url" content="https://brian861105.github.io/backend/database-selection-guide/index.html">
+<meta property="og:site_name" content="YouChen&#39;s Blog">
+<meta property="og:description" content="什麼是關聯式資料庫？關聯式資料庫是一組資訊，以預先定義的關係整理資料，可將資料儲存在一或多個資料表 (或「關係」) 的資料欄或資料列中，以輕鬆查看及瞭解不同的資料結構之間有何關聯。「關係」是不同資料表之間的邏輯連結，根據這些資料表之間的互動來建立。 『關聯』是指不同表格中可以通過共同的欄位（通常是主鍵鍵和外鍵）建立關聯。 為什麼我們使用 RDBMS 而不是 noSQLRDBMS 主要的核心在於提供">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://brian861105.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-10-01T09:59:12.000Z">
+<meta property="article:modified_time" content="2026-01-27T09:56:17.123Z">
+<meta property="article:author" content="YouChen Huang">
+<meta property="article:tag" content="database">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brian861105.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "RDBMS vs NoSQL:關聯式資料庫選型指南",
+  "url": "https://brian861105.github.io/backend/database-selection-guide/",
+  "image": "https://brian861105.github.io/img/butterfly-icon.png",
+  "datePublished": "2025-10-01T09:59:12.000Z",
+  "dateModified": "2026-01-27T09:56:17.123Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "YouChen Huang",
+      "url": "https://brian861105.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://brian861105.github.io/backend/database-selection-guide/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '複製成功',
+    error: '複製失敗',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'RDBMS vs NoSQL:關聯式資料庫選型指南',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">YouChen's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">RDBMS vs NoSQL:關聯式資料庫選型指南</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首頁</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">RDBMS vs NoSQL:關聯式資料庫選型指南</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2025-10-01T09:59:12.000Z" title="發表於 2025-10-01 17:59:12">2025-10-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2026-01-27T09:56:17.123Z" title="更新於 2026-01-27 17:56:17">2026-01-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/backend/">backend</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">瀏覽量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h2 id="什麼是關聯式資料庫？"><a href="#什麼是關聯式資料庫？" class="headerlink" title="什麼是關聯式資料庫？"></a>什麼是關聯式資料庫？</h2><p>關聯式資料庫是一組資訊，以預先定義的關係整理資料，可將資料儲存在一或多個資料表 (或「關係」) 的資料欄或資料列中，以輕鬆查看及瞭解不同的資料結構之間有何關聯。「關係」是不同資料表之間的邏輯連結，根據這些資料表之間的互動來建立。</p>
+<p>『關聯』是指不同表格中可以通過共同的欄位（通常是主鍵鍵和外鍵）建立關聯。</p>
+<h2 id="為什麼我們使用-RDBMS-而不是-noSQL"><a href="#為什麼我們使用-RDBMS-而不是-noSQL" class="headerlink" title="為什麼我們使用 RDBMS 而不是 noSQL"></a>為什麼我們使用 RDBMS 而不是 noSQL</h2><p>RDBMS 主要的核心在於提供嚴格的 ACID 特性，來確保事務(transaction)的可靠度。這對需要絕對準確性的應用（金融系統、訂單處理 etc…）至關重要。</p>
+<p>RDBMS 提供複雜查詢功能，包括多表 JOIN、聚合函數、子查詢等，雖然 noSQL 本身有具備類似的功能，但 noSQL 的 JOIN 效能通常不如 RDBMS，因為 noSQL 設計理念是避免 JOIN</p>
+<p>RDBMS 中預先定義的 Schema 確保資料格式一致,減少資料品質問題。這在需要嚴格資料規範的企業應用中特別重要。</p>
+<h2 id="RDBMS-的設計哲學與核心價值"><a href="#RDBMS-的設計哲學與核心價值" class="headerlink" title="RDBMS 的設計哲學與核心價值"></a>RDBMS 的設計哲學與核心價值</h2><p>RDBMS 主要圍繞著幾個原則來確保資料的一致性、完整性以及可靠性：</p>
+<ol>
+<li><a href="https://brian861105.github.io/backend/acid">ACID 特性</a></li>
+<li>正規化（Normalization）<br> 通過正規化減少資料冗餘，將資料分散到多個相關的表中，透過外鍵建立關聯。可以：<ul>
+<li>避免資料重複儲存</li>
+<li>降低資料不一致的風險</li>
+<li>簡化資料更新操作</li>
+<li>節省儲存空間</li>
+</ul>
+</li>
+<li>資料完整性約束<ul>
+<li>實體完整性：主鍵唯一且不為空</li>
+<li>參照完整性：外鍵必須參照存在的主鍵值</li>
+<li>領域完整性：資料類型、格式、範圍的限制</li>
+<li>使用者定義完整性：業務規則的約束</li>
+</ul>
+</li>
+</ol>
+<h2 id="何時該選-RDBMS-vs-noSQL"><a href="#何時該選-RDBMS-vs-noSQL" class="headerlink" title="何時該選 RDBMS vs noSQL"></a>何時該選 RDBMS vs noSQL</h2><h3 id="對於選擇-RDBMS-的-senario-主要在於需要"><a href="#對於選擇-RDBMS-的-senario-主要在於需要" class="headerlink" title="對於選擇 RDBMS 的 senario 主要在於需要"></a>對於選擇 RDBMS 的 senario 主要在於需要</h3><ol>
+<li><p>強一致性與 ACID 保證 有以下例子</p>
+<ul>
+<li>金融交易系統：確保交易不會遺失、重複或出現部分完成</li>
+<li>電商訂單系統：訂單、庫存、支付之間必須保持強一致性</li>
+<li>任何無法容忍資料不一致的關鍵業務場景</li>
+</ul>
+</li>
+<li><p>複雜的資料關聯與查詢</p>
+<ul>
+<li>需要頻繁進行多表 JOIN 操作</li>
+<li>複雜的聚合查詢、子查詢、窗口函數</li>
+<li>財務報表、業務分析、數據儀表板</li>
+<li>資料之間有緊密的關聯性（如用戶-訂單-商品-支付的關係網）</li>
+</ul>
+</li>
+<li><p>嚴格的資料結構與完整性</p>
+<ul>
+<li>ERP&#x2F;CRM 企業管理系統：需要嚴格的資料驗證和約束</li>
+<li>資料格式必須一致，不允許異常數據</li>
+<li>需要利用外鍵、唯一性約束等來保證資料品質</li>
+<li>Schema 相對穩定，變動頻率低</li>
+</ul>
+</li>
+<li><p>可預測的資料規模</p>
+<ul>
+<li>資料量在單機或小型叢集可處理的範圍內（TB 級以下）</li>
+<li>增長速度可預測且相對穩定</li>
+<li>垂直擴展（升級硬體）即可滿足需求</li>
+<li>RDBMS 在超大規模時，水平擴展比 NoSQL 更複雜</li>
+<li>需要手動設計分片策略，運維成本較高</li>
+</ul>
+</li>
+<li><p>成熟的生態系統與團隊經驗</p>
+<ul>
+<li>團隊熟悉 SQL 和關聯式資料庫設計</li>
+<li>豐富的工具支援（備份、監控、優化）</li>
+<li>行業最佳實踐與成熟的解決方案</li>
+</ul>
+</li>
+</ol>
+<h3 id="對於選擇-NoSQL-的-senario-主要在需要"><a href="#對於選擇-NoSQL-的-senario-主要在需要" class="headerlink" title="對於選擇 NoSQL 的 senario 主要在需要"></a>對於選擇 NoSQL 的 senario 主要在需要</h3><ol>
+<li><p>高併發與水平擴展能力，例如以下情景</p>
+<ul>
+<li>社交媒體動態牆：每秒數十萬甚至百萬次的讀寫請求</li>
+<li>即時聊天系統：大量用戶同時在線</li>
+<li>遊戲即時排行榜：頻繁的分數更新</li>
+<li>需要通過增加節點來線性提升效能</li>
+</ul>
+</li>
+<li><p>海量資料儲存</p>
+<ul>
+<li>應用日誌、系統監控數據</li>
+<li>IOT感測器產生的時序資料</li>
+<li>點擊流、用戶行為追蹤</li>
+<li>資料量達到 PB 級且持續快速增長</li>
+</ul>
+</li>
+<li><p>靈活的 Schema 設計</p>
+<ul>
+<li>產品快速迭代階段，資料結構頻繁調整</li>
+<li>半結構化或非結構化數據（如 JSON 文檔）</li>
+<li>不同記錄可能有不同的欄位</li>
+<li>內容管理系統、使用者個性化配置</li>
+</ul>
+</li>
+<li><p>最終一致性可接受</p>
+<ul>
+<li>資料分析場景，不需要即時的強一致性</li>
+<li>內容推薦系統，可容忍短暫的數據延遲</li>
+<li>瀏覽記錄、搜尋歷史等非關鍵數據</li>
+<li>分散式系統中優先考慮可用性（CAP 理論中的 AP）</li>
+</ul>
+</li>
+<li><p>簡單的查詢模式</p>
+<ul>
+<li>主要是鍵值查詢或文檔查詢</li>
+<li>很少需要跨多個集合的 JOIN 操作</li>
+<li>讀多寫少或寫多讀少的極端場景</li>
+<li>快取層應用（Redis、Memcached）</li>
+</ul>
+</li>
+<li><p>地理分散式部署</p>
+<ul>
+<li>需要跨多個數據中心部署</li>
+<li>全球化應用需要就近訪問</li>
+<li>多活架構，任一區域故障不影響整體服務</li>
+</ul>
+</li>
+</ol>
+<h3 id="選型決策樹"><a href="#選型決策樹" class="headerlink" title="選型決策樹"></a>選型決策樹</h3><p>在選擇資料庫時，可以問自己以下問題：</p>
+<p>資料一致性要求有多高？</p>
+<ul>
+<li>必須強一致 → RDBMS</li>
+<li>可接受最終一致 → 可考慮 NoSQL</li>
+</ul>
+<p>資料關聯性如何？</p>
+<ul>
+<li>高度關聯，需要頻繁 JOIN → RDBMS</li>
+<li>關聯少，資料相對獨立 → NoSQL</li>
+</ul>
+<p>資料結構是否穩定？</p>
+<ul>
+<li>穩定，變動少 → RDBMS</li>
+<li>頻繁變動，需要靈活性 → NoSQL</li>
+</ul>
+<p>預期資料量與增長速度？</p>
+<ul>
+<li>可預測，中小規模 → RDBMS</li>
+<li>爆炸性增長，海量資料 → NoSQL</li>
+</ul>
+<p>查詢複雜度如何？</p>
+<ul>
+<li>複雜查詢、多表關聯、聚合分析 → RDBMS</li>
+<li>簡單的鍵值查詢或文檔查詢 → NoSQL</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://brian861105.github.io">YouChen Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="https://brian861105.github.io/backend/database-selection-guide/">https://brian861105.github.io/backend/database-selection-guide/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 授權協議。轉載請註明來源 <a href="https://brian861105.github.io" target="_blank">YouChen's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/database/">database</a></div><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/backend/acid/" title="關聯式資料庫事務特性"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">關聯式資料庫事務特性</div></div><div class="info-2"><div class="info-item-1">ACID，是指資料庫管理系統（DBMS）在寫入或更新資料的過程中，為保證事務（transaction）是正確可靠的，所必須具備的四個特性：原子性（atomicity，或稱不可分割性）、一致性（consistency）、隔離性（isolation，又稱獨立性，主要針對事務）、持久性（durability）。 在資料庫系統中，一個事務是指：由一系列資料庫操作組成的一個完整的邏輯過程。例如銀行轉帳，從原帳戶扣除金額，以及向目標帳戶添加金額，這兩個資料庫操作的總和，構成一個完整的邏輯過程，不可拆分。這個過程被稱為一個事務，具有 ACID 特性。 資料來源:維基百科 - ACID 四大特性 原子性（Atomicity）：一個事務中的所有操作，需要全部完成，亦或者全部不完成，不會結束在中間某個環節。transaction 在執行過程中發生錯誤，會被 Rollback 到 transaction 開始前的狀態，就像這個事務從來沒有執行過一樣。即，transaction 不可分割、不可約簡。  一致性（Consistency）：在事務開始之前和事務結束以後，資料庫的完整性沒有被破壞。代表寫入的資...</div></div></div></a><a class="pagination-related" href="/backend/redis/" title="redis"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">redis</div></div><div class="info-2"><div class="info-item-1">什麼是 Redis？Redis 是一種快速、開放原始碼的記憶體內鍵值資料結構存放區。Redis 隨附一組多功能的記憶體內資料結構，讓您能夠輕鬆地建立各種自訂應用程式。Redis 主要使用案例包含快取、工作階段管理、發佈&#x2F;訂閱以及排行榜。 Redis 位於其他資料庫「之前」，目的是建立一套快取系統，減輕 noSQL or RDB 的負擔，並且加速服務。 ref : https://aws.amazon.com/tw/elasticache/what-is-redis/ 我們該如何使用它？上一段曾說道， Redis 是一套鍵值資料結構存放區，我們可以利用 key 來存放資料，在官方文件有提到 Redis 可以儲存各種位元組序列，包括文字內容、序列化後的物件、計數器數值，以及二進位資料陣列。 以 golang 為例 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相關推薦</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/backend/acid/" title="關聯式資料庫事務特性"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-10-01</div><div class="info-item-2">關聯式資料庫事務特性</div></div><div class="info-2"><div class="info-item-1">ACID，是指資料庫管理系統（DBMS）在寫入或更新資料的過程中，為保證事務（transaction）是正確可靠的，所必須具備的四個特性：原子性（atomicity，或稱不可分割性）、一致性（consistency）、隔離性（isolation，又稱獨立性，主要針對事務）、持久性（durability）。 在資料庫系統中，一個事務是指：由一系列資料庫操作組成的一個完整的邏輯過程。例如銀行轉帳，從原帳戶扣除金額，以及向目標帳戶添加金額，這兩個資料庫操作的總和，構成一個完整的邏輯過程，不可拆分。這個過程被稱為一個事務，具有 ACID 特性。 資料來源:維基百科 - ACID 四大特性 原子性（Atomicity）：一個事務中的所有操作，需要全部完成，亦或者全部不完成，不會結束在中間某個環節。transaction 在執行過程中發生錯誤，會被 Rollback 到 transaction 開始前的狀態，就像這個事務從來沒有執行過一樣。即，transaction 不可分割、不可約簡。  一致性（Consistency）：在事務開始之前和事務結束以後，資料庫的完整性沒有被破壞。代表寫入的資...</div></div></div></a><a class="pagination-related" href="/backend/redis/" title="redis"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-09-26</div><div class="info-item-2">redis</div></div><div class="info-2"><div class="info-item-1">什麼是 Redis？Redis 是一種快速、開放原始碼的記憶體內鍵值資料結構存放區。Redis 隨附一組多功能的記憶體內資料結構，讓您能夠輕鬆地建立各種自訂應用程式。Redis 主要使用案例包含快取、工作階段管理、發佈&#x2F;訂閱以及排行榜。 Redis 位於其他資料庫「之前」，目的是建立一套快取系統，減輕 noSQL or RDB 的負擔，並且加速服務。 ref : https://aws.amazon.com/tw/elasticache/what-is-redis/ 我們該如何使用它？上一段曾說道， Redis 是一套鍵值資料結構存放區，我們可以利用 key 來存放資料，在官方文件有提到 Redis 可以儲存各種位元組序列，包括文字內容、序列化後的物件、計數器數值，以及二進位資料陣列。 以 golang 為例 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">YouChen Huang</div><div class="author-info-description">不吃早餐會變笨蛋</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/brian861105"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目錄</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF%E9%97%9C%E8%81%AF%E5%BC%8F%E8%B3%87%E6%96%99%E5%BA%AB%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什麼是關聯式資料庫？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E6%88%91%E5%80%91%E4%BD%BF%E7%94%A8-RDBMS-%E8%80%8C%E4%B8%8D%E6%98%AF-noSQL"><span class="toc-number">2.</span> <span class="toc-text">為什麼我們使用 RDBMS 而不是 noSQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RDBMS-%E7%9A%84%E8%A8%AD%E8%A8%88%E5%93%B2%E5%AD%B8%E8%88%87%E6%A0%B8%E5%BF%83%E5%83%B9%E5%80%BC"><span class="toc-number">3.</span> <span class="toc-text">RDBMS 的設計哲學與核心價值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%95%E6%99%82%E8%A9%B2%E9%81%B8-RDBMS-vs-noSQL"><span class="toc-number">4.</span> <span class="toc-text">何時該選 RDBMS vs noSQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8D%E6%96%BC%E9%81%B8%E6%93%87-RDBMS-%E7%9A%84-senario-%E4%B8%BB%E8%A6%81%E5%9C%A8%E6%96%BC%E9%9C%80%E8%A6%81"><span class="toc-number">4.1.</span> <span class="toc-text">對於選擇 RDBMS 的 senario 主要在於需要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8D%E6%96%BC%E9%81%B8%E6%93%87-NoSQL-%E7%9A%84-senario-%E4%B8%BB%E8%A6%81%E5%9C%A8%E9%9C%80%E8%A6%81"><span class="toc-number">4.2.</span> <span class="toc-text">對於選擇 NoSQL 的 senario 主要在需要</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%B8%E5%9E%8B%E6%B1%BA%E7%AD%96%E6%A8%B9"><span class="toc-number">4.3.</span> <span class="toc-text">選型決策樹</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/kth-smallest-element-in-bst/" title="Kth Smallest Element in BST">Kth Smallest Element in BST</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/lowest-common-ancestor-of-bst/" title="Lowest Common Ancestor of BST">Lowest Common Ancestor of BST</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/minimum-window-substring/" title="Minimum Window Substring">Minimum Window Substring</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/product-of-array-except-self/" title="Product of Array Except Self">Product of Array Except Self</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/validate-binary-search-tree/" title="Validate Binary Search Tree">Validate Binary Search Tree</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By YouChen Huang</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日夜模式切換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目錄"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到頂端"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        loader: {
+          load: [
+            // Four font extension packages (optional)
+            //- '[tex]/bbm',
+            //- '[tex]/bboldx',
+            //- '[tex]/dsfont',
+            '[tex]/mhchem'
+          ],
+          paths: {
+            'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+
+            //- // Four font extension packages (optional)
+            //- 'mathjax-bbm-extension': '[mathjax]/../@mathjax/mathjax-bbm-font-extension',
+            //- 'mathjax-bboldx-extension': '[mathjax]/../@mathjax/mathjax-bboldx-font-extension',
+            //- 'mathjax-dsfont-extension': '[mathjax]/../@mathjax/mathjax-dsfont-font-extension',
+            'mathjax-mhchem-extension': '[mathjax]/../@mathjax/mathjax-mhchem-font-extension'
+          }
+        },
+        output: {
+          font: 'mathjax-newcm',
+        },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+          packages: {
+            '[+]': [
+              'mhchem'
+            ]
+          }
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          menuOptions: {
+            settings: {
+              enrich: false  // Turn off Braille and voice narration text automatic generation
+            }
+          },
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

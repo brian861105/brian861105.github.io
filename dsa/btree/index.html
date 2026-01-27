@@ -1,0 +1,283 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>B-Tree | YouChen's Blog</title><meta name="author" content="YouChen Huang"><meta name="copyright" content="YouChen Huang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="B-tree是一種高效的資料結構，特別適用於處理大量資料和優化I&#x2F;O操作。它常用於多存儲系統中，特別是磁盤存儲和數據庫系統，以確保高效的數據組織和查詢。 磁碟存取資料:  磁碟存取資料的基本過程 根據磁柱號碼使磁頭移動到所需要的柱面上, 這一個過程被稱為定位或是查找 根據磁盤面號來確定指定盤面上的磁道 盤面確定以後, 盤面開始旋轉, 將指定磁區的磁軌段移動至磁頭下   磁碟讀取資料是以b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="B-Tree">
+<meta property="og:url" content="https://brian861105.github.io/dsa/btree/index.html">
+<meta property="og:site_name" content="YouChen&#39;s Blog">
+<meta property="og:description" content="B-tree是一種高效的資料結構，特別適用於處理大量資料和優化I&#x2F;O操作。它常用於多存儲系統中，特別是磁盤存儲和數據庫系統，以確保高效的數據組織和查詢。 磁碟存取資料:  磁碟存取資料的基本過程 根據磁柱號碼使磁頭移動到所需要的柱面上, 這一個過程被稱為定位或是查找 根據磁盤面號來確定指定盤面上的磁道 盤面確定以後, 盤面開始旋轉, 將指定磁區的磁軌段移動至磁頭下   磁碟讀取資料是以b">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://brian861105.github.io/img/butterfly-icon.png">
+<meta property="article:published_time" content="2025-10-21T00:01:30.000Z">
+<meta property="article:modified_time" content="2026-01-27T09:56:17.124Z">
+<meta property="article:author" content="YouChen Huang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brian861105.github.io/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "B-Tree",
+  "url": "https://brian861105.github.io/dsa/btree/",
+  "image": "https://brian861105.github.io/img/butterfly-icon.png",
+  "datePublished": "2025-10-21T00:01:30.000Z",
+  "dateModified": "2026-01-27T09:56:17.124Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "YouChen Huang",
+      "url": "https://brian861105.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://brian861105.github.io/dsa/btree/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '複製成功',
+    error: '複製失敗',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'B-Tree',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">YouChen's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">B-Tree</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首頁</span></span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">B-Tree</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">發表於</span><time class="post-meta-date-created" datetime="2025-10-21T00:01:30.000Z" title="發表於 2025-10-21 08:01:30">2025-10-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新於</span><time class="post-meta-date-updated" datetime="2026-01-27T09:56:17.124Z" title="更新於 2026-01-27 17:56:17">2026-01-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/data-structures-and-algorithms/">data structures and algorithms</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">瀏覽量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>B-tree是一種高效的資料結構，特別適用於處理大量資料和優化I&#x2F;O操作。它常用於多存儲系統中，特別是磁盤存儲和數據庫系統，以確保高效的數據組織和查詢。</p>
+<p>磁碟存取資料:</p>
+<ol>
+<li>磁碟存取資料的基本過程<ol>
+<li>根據磁柱號碼使磁頭移動到所需要的柱面上, 這一個過程被稱為定位或是查找</li>
+<li>根據磁盤面號來確定指定盤面上的磁道</li>
+<li>盤面確定以後, 盤面開始旋轉, 將指定磁區的磁軌段移動至磁頭下</li>
+</ol>
+</li>
+<li>磁碟讀取資料是以block為基本單位的, 因此儘量將相關資訊存放在同一個磁區, 同一磁軌中, 以便在讀寫資料時儘量減少磁頭來回移動的次數, 避免過多的查找時間.</li>
+<li>當大量的資料儲存在磁碟中時, 如何高效地查詢磁碟中的資料, 就需要一種合理高效的資料結構了</li>
+</ol>
+<p>使用時機</p>
+<p>檔案系統或著是資料庫為了增加搜尋的效率, 就可以採用此資料結構. 在資料量變大時, 若用線性搜尋檔案中的紀錄, 效率其實是不好的, 所以這時候就可以建立索引(index), 但資料量又再度增加時, index檔案也會變得很龐大. 為此, 需要一個有效率的搜尋索引, 才能有效率的找到結果.</p>
+<p>B-Tree 特性</p>
+<p><img src="/../img/btree.png" alt="image.png"></p>
+<p>對於一顆m階（階指的是子節點的最大數目）的B-Tree，有如下特性：</p>
+<ol>
+<li>根節點要麼是葉子，要麼至少有兩個子節點</li>
+<li>每個節點最多含有m個子節點（m ≥ 2）</li>
+<li>除了根節點和葉節點之外，其他每個節點至少有⌈m&#x2F;2⌉個子節點</li>
+<li>所有的葉節點都出現在同一層上</li>
+<li>有s個子節點的非葉節點具有n &#x3D; s - 1個關鍵字，即s &#x3D; n + 1</li>
+<li>每個非葉節點中包含n個關鍵字資訊：(n, C₀, K₁, C₁, K₂, C₂, …, $K_n$, $C_n$)，其中：<ol>
+<li>$K_i$（i &#x3D; 1…n）為關鍵字，且關鍵字按升序排序：$K_{i-1}$ &lt; K_i</li>
+<li>C_i為指向子樹根的指標，且指標$C_{i-1}$指向的子樹中所有節點的關鍵字均小於$K_i$，但都大於$K_i$</li>
+<li>關鍵字的個數n必須滿足：$⌈m&#x2F;2⌉ - 1 ≤ n ≤ m - 1$</li>
+</ol>
+</li>
+</ol>
+<p>B-Tree的高度:</p>
+<ol>
+<li>就是B-Tree不包含葉節點的層數</li>
+<li>由於磁碟存取時的I&#x2F;O次數, 與B樹的高度成正比, 高度越低, I&#x2F;O次數也就越小, 因此理解如何計算B-Tree的高度是很有必要的</li>
+<li>假設若B-Tree總共包含N個關鍵字, 則此樹的葉節點可以有N+1個, 而所有的葉節點都在第K層, 可以得出:<ol>
+<li>因為根至少有兩個子節點, 因此第二層至少有兩個節點</li>
+<li>除了根和葉之外, 其它節點至少有ceil(m&#x2F;2)個子節點</li>
+<li>因此在第3層至少有2*ceil(m&#x2F;2)個節點</li>
+<li>在第4層至少有2*(ceil(m&#x2F;2)^2)個節點</li>
+<li>在第k層至少有2*(ceil(m&#x2F;2)^(k-2))個節點, 於是有: N+1 ≥ 2*(ceil(m&#x2F;2)^(K-2)), 這就可以算出: K ≤ log(ceil(m&#x2F;2))((N+1)&#x2F;2)+2</li>
+<li>由於計算B-Tree高度是不包含葉節點的層數, 所以B-Tree的高度 ≤ log(ceil(m&#x2F;2))((N+1)&#x2F;2) + 1</li>
+</ol>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://brian861105.github.io">YouChen Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章連結: </span><span class="post-copyright-info"><a href="https://brian861105.github.io/dsa/btree/">https://brian861105.github.io/dsa/btree/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版權聲明: </span><span class="post-copyright-info">本部落格所有文章除特別聲明外，均採用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 授權協議。轉載請註明來源 <a href="https://brian861105.github.io" target="_blank">YouChen's Blog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/dsa/binary-search-tree/" title="Binary Search Tree"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Binary Search Tree</div></div><div class="info-2"><div class="info-item-1">定義: 若一顆二元樹滿足以下兩點:a. 左子節點的值小於節點的值 b. 右子節點的值大於節點的值 即可稱為二元搜尋樹 12345  2            6 / \          / \1   3        5   8     &lt;-----像這樣, 這兩棵都是BST            /   / \           3   7   9  二元搜尋樹的查詢, 插入, 走訪, 查詢最大最小值和刪除操作 提示: 刪除節點有兩個子節點的時候, 要用它的中序後繼來代替該節點, 演算法為: 找到被刪除節點的右子節點, 然後查詢此右子節點下的最後一個左子節點, 即此顆子樹的最小值節點, 這就是被刪除節點的中序後繼節點. 何謂前序, 中序, 後序? 以上圖右邊的三層樹為例, 看1~2層的子樹: preorder 前序: 6 -&gt; 5 -&gt; 8 inorder 中序: 5 -&gt; 6 -&gt; 8 postorder 後序: 5 -&gt; 8 -&gt; 6 若看整顆: 中序: 3 -&gt; 5 -&gt; 6 -&gt; 7 -&gt; 8 -&g...</div></div></div></a><a class="pagination-related" href="/dsa/permutation/" title="Permutation"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Permutation</div></div><div class="info-2"><div class="info-item-1">Permutation to IndexN 筆資料的所有排列一共 N! 種。 一個階乘進位數字，可以代表一個排列。 Lehmer code 又稱 Cantor expansion ：右方數字個數，階乘，作為數量級。右方較小的、尚未出現的數字個數，作為位數。 1234567891011121314151617181920212223const int N = 5;                 // 定義陣列長度為 5int a[N] = &#123;4, 1, 5, 2, 3&#125;;     // 輸入的排列int c[N+1];                      // 樹狀數組，用於計算比當前數字小的數字個數int permutation_to_index() &#123;    int fac = 1;                 // 階乘值，用於計算康托展開    int n = 0;                   // 最終的索引結果        for (int i=1; i&lt;=N; ++i) &#123;        // 計算比...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">YouChen Huang</div><div class="author-info-description">不吃早餐會變笨蛋</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/brian861105"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/kth-smallest-element-in-bst/" title="Kth Smallest Element in BST">Kth Smallest Element in BST</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/lowest-common-ancestor-of-bst/" title="Lowest Common Ancestor of BST">Lowest Common Ancestor of BST</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/minimum-window-substring/" title="Minimum Window Substring">Minimum Window Substring</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/product-of-array-except-self/" title="Product of Array Except Self">Product of Array Except Self</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/validate-binary-search-tree/" title="Validate Binary Search Tree">Validate Binary Search Tree</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By YouChen Huang</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="閱讀模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日夜模式切換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到頂端"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        loader: {
+          load: [
+            // Four font extension packages (optional)
+            //- '[tex]/bbm',
+            //- '[tex]/bboldx',
+            //- '[tex]/dsfont',
+            '[tex]/mhchem'
+          ],
+          paths: {
+            'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+
+            //- // Four font extension packages (optional)
+            //- 'mathjax-bbm-extension': '[mathjax]/../@mathjax/mathjax-bbm-font-extension',
+            //- 'mathjax-bboldx-extension': '[mathjax]/../@mathjax/mathjax-bboldx-font-extension',
+            //- 'mathjax-dsfont-extension': '[mathjax]/../@mathjax/mathjax-dsfont-font-extension',
+            'mathjax-mhchem-extension': '[mathjax]/../@mathjax/mathjax-mhchem-font-extension'
+          }
+        },
+        output: {
+          font: 'mathjax-newcm',
+        },
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+          packages: {
+            '[+]': [
+              'mhchem'
+            ]
+          }
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          menuOptions: {
+            settings: {
+              enrich: false  // Turn off Braille and voice narration text automatic generation
+            }
+          },
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

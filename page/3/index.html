@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>YouChen's Blog</title><meta name="author" content="YouChen Huang"><meta name="copyright" content="YouChen Huang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="不吃早餐會變笨蛋">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YouChen&#39;s Blog">
+<meta property="og:url" content="https://brian861105.github.io/page/3/index.html">
+<meta property="og:site_name" content="YouChen&#39;s Blog">
+<meta property="og:description" content="不吃早餐會變笨蛋">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://brian861105.github.io/img/butterfly-icon.png">
+<meta property="article:author" content="YouChen Huang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://brian861105.github.io/img/butterfly-icon.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://brian861105.github.io/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '複製成功',
+    error: '複製失敗',
+    noSupport: '瀏覽器不支援'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '剛剛',
+    min: '分鐘前',
+    hour: '小時前',
+    day: '天前',
+    month: '個月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '載入更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'YouChen\'s Blog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">YouChen's Blog</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">YouChen's Blog</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/dsa/btree/" title="B-Tree">B-Tree</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2025-10-21T00:01:30.000Z" title="發表於 2025-10-21 08:01:30">2025-10-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/data-structures-and-algorithms/">data structures and algorithms</a></span></div><div class="content">B-tree是一種高效的資料結構，特別適用於處理大量資料和優化I&#x2F;O操作。它常用於多存儲系統中，特別是磁盤存儲和數據庫系統，以確保高效的數據組織和查詢。 磁碟存取資料:  磁碟存取資料的基本過程 根據磁柱號碼使磁頭移動到所需要的柱面上, 這一個過程被稱為定位或是查找 根據磁盤面號來確定指定盤面上的磁道 盤面確定以後, 盤面開始旋轉, 將指定磁區的磁軌段移動至磁頭下   磁碟讀取資料是以block為基本單位的, 因此儘量將相關資訊存放在同一個磁區, 同一磁軌中, 以便在讀寫資料時儘量減少磁頭來回移動的次數, 避免過多的查找時間. 當大量的資料儲存在磁碟中時, 如何高效地查詢磁碟中的資料, 就需要一種合理高效的資料結構了  使用時機 檔案系統或著是資料庫為了增加搜尋的效率, 就可以採用此資料結構. 在資料量變大時, 若用線性搜尋檔案中的紀錄, 效率其實是不好的, 所以這時候就可以建立索引(index), 但資料量又再度增加時, index檔案也會變得很龐大. 為此, 需要一個有效率的搜尋索引, 才能有效率的找到結果. B-Tree 特性  對於一顆m階（階指的是子節點的最大...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/dsa/permutation/" title="Permutation">Permutation</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2025-10-21T00:00:03.000Z" title="發表於 2025-10-21 08:00:03">2025-10-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/data-structures-and-algorithms/">data structures and algorithms</a></span></div><div class="content">Permutation to IndexN 筆資料的所有排列一共 N! 種。 一個階乘進位數字，可以代表一個排列。 Lehmer code 又稱 Cantor expansion ：右方數字個數，階乘，作為數量級。右方較小的、尚未出現的數字個數，作為位數。 1234567891011121314151617181920212223const int N = 5;                 // 定義陣列長度為 5int a[N] = &#123;4, 1, 5, 2, 3&#125;;     // 輸入的排列int c[N+1];                      // 樹狀數組，用於計算比當前數字小的數字個數int permutation_to_index() &#123;    int fac = 1;                 // 階乘值，用於計算康托展開    int n = 0;                   // 最終的索引結果        for (int i=1; i&lt;=N; ++i) &#123;        // 計算比...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/dsa/heap/" title="Heap">Heap</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2025-10-20T23:58:01.000Z" title="發表於 2025-10-21 07:58:01">2025-10-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/data-structures-and-algorithms/">data structures and algorithms</a></span></div><div class="content">Binary Heap 為甚麼Binary heap 有兩個特點：  Binary heap 是一個完全二元樹 (complete binary tree)，完全樹的意思是除了最後一層外每一層都填滿，最後一層必須由左至右填入。 Max heap 的每個結點的值，大於其左節點的值和右節點的值，根節點是整棵樹最大的節點；Min heap 每個結點的值，小於其左節點的值和右節點的值，根節點是整棵樹最小的節點。  </div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/backend/solid/" title="SOLID">SOLID</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2025-10-20T23:55:30.000Z" title="發表於 2025-10-21 07:55:30">2025-10-21</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/backend/">backend</a></span></div><div class="content">Abstract  V.S. Virtual Abstract:  An abstract class&#x2F;method MUST be implemented by derived classes Abstract classes cannot be instantiated directly Classes with abstract methods must be declared abstract Abstract methods have no implementation in the base class  Virtual:  A virtual method CAN be overridden by derived classes Virtual methods have a default implementation in the base class Classes with virtual methods can be instantiated Derived classes may choose to override or use the bas...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/backend/acid/" title="關聯式資料庫事務特性">關聯式資料庫事務特性</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2025-10-01T10:30:40.000Z" title="發表於 2025-10-01 18:30:40">2025-10-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/backend/">backend</a></span></div><div class="content">ACID，是指資料庫管理系統（DBMS）在寫入或更新資料的過程中，為保證事務（transaction）是正確可靠的，所必須具備的四個特性：原子性（atomicity，或稱不可分割性）、一致性（consistency）、隔離性（isolation，又稱獨立性，主要針對事務）、持久性（durability）。 在資料庫系統中，一個事務是指：由一系列資料庫操作組成的一個完整的邏輯過程。例如銀行轉帳，從原帳戶扣除金額，以及向目標帳戶添加金額，這兩個資料庫操作的總和，構成一個完整的邏輯過程，不可拆分。這個過程被稱為一個事務，具有 ACID 特性。 資料來源:維基百科 - ACID 四大特性 原子性（Atomicity）：一個事務中的所有操作，需要全部完成，亦或者全部不完成，不會結束在中間某個環節。transaction 在執行過程中發生錯誤，會被 Rollback 到 transaction 開始前的狀態，就像這個事務從來沒有執行過一樣。即，transaction 不可分割、不可約簡。  一致性（Consistency）：在事務開始之前和事務結束以後，資料庫的完整性沒有被破壞。代表寫入的資...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/backend/database-selection-guide/" title="RDBMS vs NoSQL:關聯式資料庫選型指南">RDBMS vs NoSQL:關聯式資料庫選型指南</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2025-10-01T09:59:12.000Z" title="發表於 2025-10-01 17:59:12">2025-10-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/backend/">backend</a></span></div><div class="content">什麼是關聯式資料庫？關聯式資料庫是一組資訊，以預先定義的關係整理資料，可將資料儲存在一或多個資料表 (或「關係」) 的資料欄或資料列中，以輕鬆查看及瞭解不同的資料結構之間有何關聯。「關係」是不同資料表之間的邏輯連結，根據這些資料表之間的互動來建立。 『關聯』是指不同表格中可以通過共同的欄位（通常是主鍵鍵和外鍵）建立關聯。 為什麼我們使用 RDBMS 而不是 noSQLRDBMS 主要的核心在於提供嚴格的 ACID 特性，來確保事務(transaction)的可靠度。這對需要絕對準確性的應用（金融系統、訂單處理 etc…）至關重要。 RDBMS 提供複雜查詢功能，包括多表 JOIN、聚合函數、子查詢等，雖然 noSQL 本身有具備類似的功能，但 noSQL 的 JOIN 效能通常不如 RDBMS，因為 noSQL 設計理念是避免 JOIN RDBMS 中預先定義的 Schema 確保資料格式一致,減少資料品質問題。這在需要嚴格資料規範的企業應用中特別重要。 RDBMS 的設計哲學與核心價值RDBMS 主要圍繞著幾個原則來確保資料的一致性、完整性以及可靠性：  ACID 特性 正規化...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/backend/redis/" title="redis">redis</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2025-09-25T20:52:28.000Z" title="發表於 2025-09-26 04:52:28">2025-09-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/backend/">backend</a></span></div><div class="content">什麼是 Redis？Redis 是一種快速、開放原始碼的記憶體內鍵值資料結構存放區。Redis 隨附一組多功能的記憶體內資料結構，讓您能夠輕鬆地建立各種自訂應用程式。Redis 主要使用案例包含快取、工作階段管理、發佈&#x2F;訂閱以及排行榜。 Redis 位於其他資料庫「之前」，目的是建立一套快取系統，減輕 noSQL or RDB 的負擔，並且加速服務。 ref : https://aws.amazon.com/tw/elasticache/what-is-redis/ 我們該如何使用它？上一段曾說道， Redis 是一套鍵值資料結構存放區，我們可以利用 key 來存放資料，在官方文件有提到 Redis 可以儲存各種位元組序列，包括文字內容、序列化後的物件、計數器數值，以及二進位資料陣列。 以 golang 為例 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/dsa/binary-search/" title="Binary Search">Binary Search</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2025-09-23T02:51:38.000Z" title="發表於 2025-09-23 10:51:38">2025-09-23</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/data-structures-and-algorithms/">data structures and algorithms</a></span></div><div class="content">二元搜尋法(binary search)用於尋找有序陣列中目標值位置的搜尋演算法。 二元搜尋比較目標值與陣列中間的元素的大小，如果兩者不相等則會捨棄不可能包含目標值那一半區間，然後在剩餘區間重複此過程，每次選取新的中間元素並與目標值比較，直至找到目標或區間為空。若區間為空，則說明目標值不存在。 worst case 狀況時間複雜度為 $O(logn)$，其中 n 為元素數量。 二分搜尋有許多其他形式。例如，分數級聯能加快在多個陣列中尋找同一數值的速度，還能高效地解決計算幾何等領域的搜尋問題；指數搜尋則將搜尋範圍擴充至無界列表。二元搜尋樹和B樹等資料結構的實現也基於二分搜尋原理。 1234567891011121314151617181920212223#include &lt;vector&gt;using namespace std;int binary_search(vector&lt;int&gt;&amp; arr, int target) &#123;    int L = 0;    int R = arr.size() - 1;        while (L &l...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/dsa/two-pointer/" title="Two Pointer">Two Pointer</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2025-09-19T09:00:32.000Z" title="發表於 2025-09-19 17:00:32">2025-09-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/data-structures-and-algorithms/">data structures and algorithms</a></span></div><div class="content">Two Pointer 的產生源自於一個核心問題，如何有效處理陣列或者序列中的配對、區間以及範圍搜尋問題。 最初，我們在遇到需要在陣列中尋找配對或者子陣列的問題時，最直觀的方式便是使用雙重迴圈 (nested loops)。例如，在一個陣列中找到兩個數的和等於目標值： 1234567for(int i = 0; i &lt; arr.len(); i++)&#123;    for(int j = i + 1; j &lt; arr.len(); j++)&#123;        for(arr[i] + arr[j] == target)&#123;            return [i, j];        &#125;    &#125;&#125; 但是雙重迴圈的方式，導致的後果就是時間複雜度為 $O(n^2)$ 相比於暴力解法的「盲目搜尋」，Two Pointer 提供了一種「有方向性的搜尋」策略。 兩者差異在於，暴力解需要檢查所有可能組合，two pointer 需要根據問題特性，有策略性的縮小搜尋範圍。 Key PointTwo Pointer 的產生基於對...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/leetcode/split-array-largest-sum/" title="Split Array Largest Sum">Split Array Largest Sum</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">發表於</span><time datetime="2025-09-19T08:16:48.000Z" title="發表於 2025-09-19 16:16:48">2025-09-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/leetcode/">leetcode</a></span></div><div class="content">Split Array Largest SumProblem DescriptionGiven an integer array nums and an integer k, split nums into k non-empty subarrays such that the largest sum of any subarray is minimized. Return the minimized largest sum of the split. A subarray is a contiguous part of the array. IntuitionThe front element of preorder traversal determines the tree’s root node(the middle of inorder traversal). We use it to determine which element belong to the left subtree or right subtree, and keep comparing the pr...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/#content-inner">4</a><a class="extend next" rel="next" href="/page/4/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">YouChen Huang</div><div class="author-info-description">不吃早餐會變笨蛋</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/"><div class="headline">標籤</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分類</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/brian861105"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/kth-smallest-element-in-bst/" title="Kth Smallest Element in BST">Kth Smallest Element in BST</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/lowest-common-ancestor-of-bst/" title="Lowest Common Ancestor of BST">Lowest Common Ancestor of BST</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/minimum-window-substring/" title="Minimum Window Substring">Minimum Window Substring</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/product-of-array-except-self/" title="Product of Array Except Self">Product of Array Except Self</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/leetcode/validate-binary-search-tree/" title="Validate Binary Search Tree">Validate Binary Search Tree</a><time datetime="2026-01-27T09:56:17.126Z" title="發表於 2026-01-27 17:56:17">2026-01-27</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分類</span>
+            
+          </div>
+          <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/backend/"><span class="card-category-list-name">backend</span><span class="card-category-list-count">8</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/data-structures-and-algorithms/"><span class="card-category-list-name">data structures and algorithms</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/leetcode/"><span class="card-category-list-name">leetcode</span><span class="card-category-list-count">14</span></a></li>
+          </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>標籤</span></div><div class="card-tag-cloud"><a href="/tags/sliding-windows/" style="font-size: 1.23em; color: #999ea6">sliding_windows</a> <a href="/tags/dynamic-programming/" style="font-size: 1.23em; color: #999ea6">dynamic_programming</a> <a href="/tags/linked-list/" style="font-size: 1.1em; color: #999">linked_list</a> <a href="/tags/database/" style="font-size: 1.37em; color: #99a4b2">database</a> <a href="/tags/tree/" style="font-size: 1.1em; color: #999">Tree</a> <a href="/tags/development-tool/" style="font-size: 1.1em; color: #999">development tool</a> <a href="/tags/dfs/" style="font-size: 1.23em; color: #999ea6">dfs</a> <a href="/tags/stack/" style="font-size: 1.1em; color: #999">stack</a> <a href="/tags/two-pointer/" style="font-size: 1.5em; color: #99a9bf">two_pointer</a> <a href="/tags/os/" style="font-size: 1.1em; color: #999">OS</a> <a href="/tags/csharp/" style="font-size: 1.23em; color: #999ea6">csharp</a> <a href="/tags/bst/" style="font-size: 1.37em; color: #99a4b2">BST</a> <a href="/tags/bfs/" style="font-size: 1.1em; color: #999">bfs</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>歸檔</span>
+      
+    </div>
+  
+    <ul class="card-archive-list">
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2026/01/">
+            <span class="card-archive-list-date">
+              一月 2026
+            </span>
+            <span class="card-archive-list-count">10</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/10/">
+            <span class="card-archive-list-date">
+              十月 2025
+            </span>
+            <span class="card-archive-list-count">16</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/09/">
+            <span class="card-archive-list-date">
+              九月 2025
+            </span>
+            <span class="card-archive-list-count">6</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2025/08/">
+            <span class="card-archive-list-date">
+              八月 2025
+            </span>
+            <span class="card-archive-list-count">1</span>
+          </a>
+        </li>
+      
+        <li class="card-archive-list-item">
+          <a class="card-archive-list-link" href="/archives/2024/10/">
+            <span class="card-archive-list-date">
+              十月 2024
+            </span>
+            <span class="card-archive-list-count">2</span>
+          </a>
+        </li>
+      
+    </ul>
+  </div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>網站資訊</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章數量 :</div><div class="item-count">35</div></div><div class="webinfo-item"><div class="item-name">訪客數 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">總瀏覽量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最後更新時間 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2026-01-27T10:09:38.674Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By YouChen Huang</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主題 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.4</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日夜模式切換"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="單欄和雙欄切換"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="設定"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到頂端"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
